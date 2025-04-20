@@ -1,0 +1,45 @@
+/* index.css or App.css */
+
+/* Default (light) mode styles */
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3 {
+  color: #f5f5f5;
+}
+
+body.dark-mode button {
+  background-color: #444;
+}
+
+body.dark-mode button:hover {
+  background-color: #777;
+}
