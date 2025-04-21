@@ -1,13 +1,18 @@
-import React from 'react';
-import useGitHubData from './hooks/useGitHubData';
-import SearchBar from './components/SearchBar';
-import DarkModeToggle from './components/DarkModeToggle';
-import UserProfile from './components/UserProfile'; 
-import RepoList from './components/RepoList';
-import Pagination from './components/Pagination';
-import Filters from './components/Filters';
+import React, { useState } from "react";
+import useGitHubData from "./hooks/useGitHubData";
+import SearchBar from "./components/SearchBar";
+import DarkModeToggle from "./components/DarkModeToggle";
+import UserProfile from "./components/UserProfile";
+import RepoList from "./components/RepoList";
+import Pagination from "./components/Pagination";
+import Filters from "./components/Filters";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
   const {
     userData,
     paginatedRepos,
@@ -21,40 +26,47 @@ function App() {
     setCurrentPage,
     handleSortChange,
     handleLanguageFilter,
-    availableLanguages
+    availableLanguages,
   } = useGitHubData();
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <h1>🔍 GitHub User Explorer</h1>
-      <SearchBar onSearch={fetchGitHubData} />
-      <DarkModeToggle />
+    <div className={darkMode ? "bg-dark text-white" : ""}>
+      <div className="w-50 mx-auto pt-5">
+        <div className="d-flex justify-content-between align-items-center">
+          <h1>devfinder</h1>
+          <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+        </div>
 
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+        <SearchBar onSearch={fetchGitHubData} darkMode={darkMode} />
 
-      <UserProfile user={userData} />
+        {loading && <p className="text-info">Loading...</p>}
+        {error && <p className="text-danger">{error}</p>}
 
-      {userData && (
-        <Filters
-          sortOption={sortOption}
-          onSortChange={handleSortChange}
-          languageFilter={languageFilter}
-          onLanguageChange={handleLanguageFilter}
-          languages={availableLanguages}
-        />
-      )}
+        <UserProfile user={userData} darkMode={darkMode} />
 
-      {paginatedRepos.length > 0 && (
-        <div>	
-        <RepoList repos={paginatedRepos} />
-        <Pagination 
-          currentPage={currentPage} 
-          totalPages={totalPages}
-          handlePageChange={setCurrentPage}
-        />
+        {userData && (
+          <Filters
+            sortOption={sortOption}
+            onSortChange={handleSortChange}
+            languageFilter={languageFilter}
+            onLanguageChange={handleLanguageFilter}
+            languages={availableLanguages}
+            darkMode={darkMode}
+          />
+        )}
+
+        <div>
+          <RepoList repos={paginatedRepos} darkMode={darkMode} />
+          {paginatedRepos.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageChange={setCurrentPage}
+              darkMode={darkMode}
+            />
+          )}
+        </div>
       </div>
-      )}
     </div>
   );
 }

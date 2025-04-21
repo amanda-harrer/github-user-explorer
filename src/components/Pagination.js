@@ -1,22 +1,44 @@
-import React from 'react';
+import React from "react";
 
-function Pagination({ currentPage, totalPages, handlePageChange }) {
+function Pagination({ currentPage, totalPages, handlePageChange, darkMode }) {
   return (
-    <div>
-      <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage <= 1}
-      >
-        Previous
-      </button>
-      <span>Page {currentPage} of {totalPages}</span>
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage >= totalPages}
-      >
-        Next
-      </button>
-    </div>
+    <nav
+      className={`d-flex justify-content-center mt-4 ${darkMode ? "bg-dark" : ""}`}
+    >
+      <ul className="pagination">
+        <li className="page-item">
+          <button
+            className={`page-link ${darkMode ? "bg-dark text-white border-secondary" : ""}`}
+            onClick={() => handlePageChange(currentPage - 1)}
+            style={{ visibility: currentPage > 1 ? "visible" : "hidden" }}
+            aria-label="Previous"
+          >
+            &lt;
+          </button>
+        </li>
+
+        <li className="page-item disabled">
+          <span
+            className={`page-link ${darkMode ? "bg-dark text-white border-secondary" : ""}`}
+          >
+            Page {currentPage} of {totalPages}
+          </span>
+        </li>
+
+        <li className="page-item">
+          <button
+            className={`page-link ${darkMode ? "bg-dark text-white border-secondary" : ""}`}
+            onClick={() => handlePageChange(currentPage + 1)}
+            style={{
+              visibility: currentPage < totalPages ? "visible" : "hidden",
+            }}
+            aria-label="Next"
+          >
+            &gt;
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
