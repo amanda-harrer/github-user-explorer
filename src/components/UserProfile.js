@@ -10,7 +10,7 @@ function UserProfile({ user, darkMode }) {
       <div className="card-body text-left d-flex">
         {/* Avatar and Text Section */}
         <img
-          src={user.avatar_url}
+          src={user.avatar_url || null}
           alt="avatar"
           className="rounded-circle me-3"
           style={{
