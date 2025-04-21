@@ -19,7 +19,7 @@ function Pagination({ currentPage, totalPages, handlePageChange, darkMode }) {
 
         <li className="page-item disabled">
           <span
-            className={`page-link ${darkMode ? "bg-dark text-white border-secondary" : ""}`}
+            className={`page-link ${darkMode ? "bg-dark text-white border-secondary" : "bg-white text-dark"}`}
           >
             Page {currentPage} of {totalPages}
           </span>

@@ -9,9 +9,9 @@ const Filters = ({
   darkMode,
 }) => (
   <div
-    className={`d-flex justify-content-end gap-4 my-3 ${darkMode ? "bg-dark text-white" : ""}`}
+    className={`d-flex flex-column flex-md-row justify-content-md-end gap-4 my-3 ${darkMode ? "bg-dark text-white" : ""}`}
   >
-    <div>
+    <div className="w-100 w-md-auto">
       <label htmlFor="sortSelect" className="form-label mb-1 text-end">
         Sort by:
       </label>
@@ -27,7 +27,7 @@ const Filters = ({
       </select>
     </div>
 
-    <div>
+    <div className="w-100 w-md-auto">
       <label htmlFor="languageSelect" className="form-label mb-1 text-end">
         Language:
       </label>

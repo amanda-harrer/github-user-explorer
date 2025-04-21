@@ -31,20 +31,24 @@ function App() {
 
   return (
     <div className={darkMode ? "bg-dark text-white" : ""}>
-      <div className="w-50 mx-auto pt-5">
-        <div className="d-flex justify-content-between align-items-center">
-          <h1>devfinder</h1>
+      <div className="container py-5">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+          <h1 className="mb-3 mb-md-0">devfinder</h1>
           <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
 
         <SearchBar onSearch={fetchGitHubData} darkMode={darkMode} />
 
-        {loading && <p className="text-info">Loading...</p>}
+        {loading && (
+          <p className={`${darkMode ? "text-light" : "text-muted"}`}>
+            Loading...
+          </p>
+        )}
         {error && <p className="text-danger">{error}</p>}
 
         <UserProfile user={userData} darkMode={darkMode} />
 
-        {userData && (
+        {userData?.public_repos > 0 && (
           <Filters
             sortOption={sortOption}
             onSortChange={handleSortChange}
